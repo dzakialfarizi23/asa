@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Scheduler - Priority Round Robin</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-slideshow"></div>
+    <div class="header">
+      <h1>📋 Task Scheduler</h1>
+      <p class="subtitle">Kelola dan Jadwalkan Tugas dengan Sistem Priority Round Robin</p>
+    </div>
+
+    <div class="container">
+      <div class="input-section">
+        <h2>📝 Tambah Tugas Baru</h2>
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="name">Nama Tugas</label>
+            <input type="text" id="name" placeholder="Contoh: Tugas Matematika" />
+          </div>
+          <div class="input-group">
+            <label for="deadline">Tenggat Waktu (Deadline)</label>
+            <input type="date" id="deadline" />
+          </div>
+          <div class="input-group">
+            <label for="duration">Estimasi Waktu Pengerjaan</label>
+            <input type="number" id="duration" placeholder="Dalam jam" min="1" />
+            <small>Berapa jam untuk menyelesaikan?</small>
+          </div>
+          <div class="input-group">
+            <label for="priority">Tingkat Prioritas</label>
+            <select id="priority">
+              <option value="1">⭐⭐⭐ Sangat Penting</option>
+              <option value="2">⭐⭐ Penting</option>
+              <option value="3">⭐ Normal</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-add" onclick="addTask()"><span>➕</span> Tambah Tugas</button>
+      </div>
+
+      <div class="execution-section">
+        <h2>⚙️ Konfigurasi Penjadwalan</h2>
+        <div class="quantum-input">
+          <label for="quantum">Waktu per Sesi (Time Quantum)</label>
+          <input type="number" id="quantum" placeholder="2" min="1" value="2" />
+          <small>Jam per sesi pengerjaan (untuk fokus optimal)</small>
+        </div>
+        <button class="btn-run" onclick="runScheduling()"><span>▶️</span> Buat Jadwal Otomatis</button>
+      </div>
+
+      <div class="table-section">
+        <h2>📊 Daftar Tugas</h2>
+        <div class="table-wrapper">
+          <table id="taskTable">
+            <thead>
+              <tr>
+                <th>Nama Tugas</th>
+                <th>Deadline</th>
+                <th>Estimasi Waktu</th>
+                <th>Prioritas</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">📭</div>
+            <p>Belum ada tugas. Tambahkan tugas pertama Anda!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-section" id="resultSection" style="display: none">
+        <h2>✅ Hasil Penjadwalan</h2>
+        <div class="gantt-container">
+          <h3>📅 Timeline Pengerjaan</h3>
+          <div id="ganttChart"></div>
+        </div>
+        <div class="stats-container">
+          <h3>📈 Detail Tugas</h3>
+          <div id="taskDetails"></div>
+        </div>
+        <div class="average-container">
+          <div class="stat-card stat-card-1">
+            <div class="stat-icon">⏱️</div>
+            <div class="stat-label">Rata-rata Waktu Tunggu</div>
+            <div class="stat-value" id="avgWT">0</div>
+            <div class="stat-unit">jam</div>
+          </div>
+          <div class="stat-card stat-card-2">
+            <div class="stat-icon">🏁</div>
+            <div class="stat-label">Rata-rata Total Waktu</div>
+            <div class="stat-value" id="avgTAT">0</div>
+            <div class="stat-unit">jam</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
